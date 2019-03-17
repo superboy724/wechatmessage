@@ -46,7 +46,7 @@ func (t *RegisterProcesser) GetRequest(values map[string]string) string {
 	}
 }
 
-func (t *RegisterProcesser) PostRequest(values map[string]string, body string) string {
+func (t *RegisterProcesser) PostRequest(values map[string]string, body []byte) string {
 	return ""
 }
 

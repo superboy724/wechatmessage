@@ -7,7 +7,7 @@ import (
 
 func main() {
 	server := server.NewServer(80)
-	p := processer.NewRegisterProcesser()
+	p := processer.NewMessageProcesser()
 	server.SetProcesser(p)
 	server.Run()
 }

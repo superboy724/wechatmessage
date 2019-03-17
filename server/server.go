@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"github.com/superboy724/wechatmessage/processer"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 )
@@ -39,6 +40,22 @@ func (t *Server) read(w http.ResponseWriter, r *http.Request) {
 			values[key] = value[0]
 		}
 		res := t.processer.GetRequest(values)
+		fmt.Fprintln(w, res)
+	}
+	if method == "POST" {
+		r.ParseForm()
+		values := make(map[string]string, len(r.Form))
+		for key, value := range r.Form {
+			values[key] = value[0]
+		}
+
+		body, err := ioutil.ReadAll(r.Body)
+
+		if err != nil {
+			fmt.Fprintln(w, "")
+		}
+
+		res := t.processer.PostRequest(values, body)
 		fmt.Fprintln(w, res)
 	}
 }
